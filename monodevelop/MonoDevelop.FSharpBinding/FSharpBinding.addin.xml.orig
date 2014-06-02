@@ -106,56 +106,93 @@
   <!-- By default projects use the F# 3.1 targets file unless only 3.0 is available on the machine. -->
   <!-- New projects will be created with this targets file. -->
   <Extension path="/MonoDevelop/ProjectModel/MSBuildItemTypes">
-
-            <!--  If FSharp 3.1 is available, use it. Note XS looks for the first DotNetProject node under 'Extension' -->
+    <ComplexCondition>
+      <Or>
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" />
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
+      </Or>
+      <!--  If FSharp 3.1 is available, use it. Note XS looks for the first DotNetProject node under 'Extension' -->
 	    <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" >
-              <DotNetProject language="F#" extension="fsproj" guid="{4925A630-B079-445d-BCD4-3A9C94FE9307}" import="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets"  resourceHandler="MonoDevelop.FSharp.FSharpResourceIdBuilder"/>
+        <DotNetProject language="F#" extension="fsproj" guid="{4925A630-B079-445d-BCD4-3A9C94FE9307}" import="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets"  resourceHandler="MonoDevelop.FSharp.FSharpResourceIdBuilder"/>
 	    </Condition>
-
-            <!--  If FSharp 3.1 is not available, then use FSharp 3.0  -->
-            <DotNetProject language="F#" extension="fsproj" guid="{4925A630-B079-445d-BCD4-3A9C94FE9307}" import="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets"  resourceHandler="MonoDevelop.FSharp.FSharpResourceIdBuilder"/>
+        <!--  If FSharp 3.1 is not available, then use FSharp 3.0  -->
+        <DotNetProject language="F#" extension="fsproj" guid="{4925A630-B079-445d-BCD4-3A9C94FE9307}" import="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets"  resourceHandler="MonoDevelop.FSharp.FSharpResourceIdBuilder"/>
+    </ComplexCondition>
   </Extension>
 
   <Extension path="/MonoDevelop/Ide/GlobalOptionsDialog/Other">
-    <Section id="FSharpSettings" _label="F# Settings" class = "MonoDevelop.FSharp.FSharpSettingsPanel" />
+    <ComplexCondition>
+      <Or>
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" />
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
+      </Or>
+      <Section id="FSharpSettings" _label="F# Settings" class = "MonoDevelop.FSharp.FSharpSettingsPanel" />
+    </ComplexCondition>
   </Extension>
 
   <Extension path="/MonoDevelop/TypeSystem/Parser">
-    <Parser class="MonoDevelop.FSharp.FSharpParser"  mimeType = "text/x-fsharp" />
+    <ComplexCondition>
+      <Or>
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" />
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
+      </Or>
+      <Parser class="MonoDevelop.FSharp.FSharpParser"  mimeType = "text/x-fsharp" />
+    </ComplexCondition>
   </Extension>
 
   <Extension path = "/MonoDevelop/SourceEditor2/TooltipProviders">
-    <Class id="LanguageItem" class="MonoDevelop.FSharp.FSharpLanguageItemTooltipProvider" />
+    <ComplexCondition>
+      <Or>
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" />
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
+      </Or>
+      <Class id="LanguageItem" class="MonoDevelop.FSharp.FSharpLanguageItemTooltipProvider" />
+    </ComplexCondition>
   </Extension>
 
   <Extension path="/MonoDevelop/Ide/TextEditorResolver">
-    <Resolver class="MonoDevelop.FSharp.FSharpResolverProvider" mimeType="text/x-fsharp" />
+    <ComplexCondition>
+      <Or>
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" />
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
+      </Or>
+      <Resolver class="MonoDevelop.FSharp.FSharpResolverProvider" mimeType="text/x-fsharp" />
+  </ComplexCondition>
   </Extension>
 
   <Extension path="/MonoDevelop/Ide/FileFilters">
-    <FileFilter id="F#" insertbefore="AllFiles" _label="F# Source Files" extensions="*.fs;*.fsi;*.fsx;*.fsscript"/>
+    <ComplexCondition>
+      <Or>
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" />
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
+      </Or>
+      <FileFilter id="F#" insertbefore="AllFiles" _label="F# Source Files" extensions="*.fs;*.fsi;*.fsx;*.fsscript"/>
+  </ComplexCondition>
   </Extension>
 
   <Extension path="/MonoDevelop/Ide/FileTemplates">
-    <FileTemplate id="EmptyFSharpSource" file="Templates/EmptyFSharpSource.xft.xml"/>
-    <FileTemplate id="EmptyFSharpScript" file="Templates/EmptyFSharpScript.xft.xml"/>
-    <FileTemplate id="EmptyFSharpSignature" file="Templates/EmptyFSharpSignature.xft.xml"/>
-    <FileTemplate id="FSharpAssemblyInfo" file="Templates/AssemblyInfo.xft.xml" />
-    <FileTemplate id="FSharpNUnitTestType" file="Templates/FSharpNUnitTestType.xft.xml" />
+    <ComplexCondition>
+      <Or>
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" />
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
+      </Or>
+      <FileTemplate id="EmptyFSharpSource" file="Templates/EmptyFSharpSource.xft.xml"/>
+      <FileTemplate id="EmptyFSharpScript" file="Templates/EmptyFSharpScript.xft.xml"/>
+      <FileTemplate id="EmptyFSharpSignature" file="Templates/EmptyFSharpSignature.xft.xml"/>
+      <FileTemplate id="FSharpAssemblyInfo" file="Templates/AssemblyInfo.xft.xml" />
+      <FileTemplate id="FSharpNUnitTestType" file="Templates/FSharpNUnitTestType.xft.xml" />
+    </ComplexCondition>
   </Extension>
 
   <Extension path="/MonoDevelop/Ide/ProjectTemplates">
-    <ProjectTemplate id="FSharpConsoleProject" file="Templates/FSharpConsoleProject.xpt.xml"/>
-    <ProjectTemplate id="FSharpLibraryProject" file="Templates/FSharpLibraryProject.xpt.xml"/>
-    <!-- Only include the tutorial project if an F# 3.0 or 3.1 target is available as this includes F# 3.0 specific features -->
-	<ComplexCondition>
+	 <ComplexCondition>
 		<Or>
 			<Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" />
 			<Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
 		</Or>
+    <ProjectTemplate id="FSharpConsoleProject" file="Templates/FSharpConsoleProject.xpt.xml"/>
+    <ProjectTemplate id="FSharpLibraryProject" file="Templates/FSharpLibraryProject.xpt.xml"/>
 		<ProjectTemplate id="FSharpTutorialProject" file="Templates/FSharpTutorialProject.xpt.xml"/>
-	</ComplexCondition>
-      
     <ProjectTemplate id="FSharpGtkProject" file="Templates/FSharpGtkProject.xpt.xml"/>
     <Condition id="Platform" value="windows">
       <ProjectTemplate id="FSharpMvc4Project" file="Templates/FSharpProjectMvc4Razor.windows.xpt.xml"/>
@@ -164,124 +201,193 @@
       <ProjectTemplate id="FSharpMvc4Project" file="Templates/FSharpProjectMvc4Razor.xpt.xml"/>
     </Condition>
     <ProjectTemplate id="FSharpNUnitLibraryProject" file="Templates/FSharpNUnitLibraryProject.xpt.xml"/>
+	 </ComplexCondition>
   </Extension>
 
   <Extension path = "/MonoDevelop/ProjectModel/SerializableClasses">
-    <DataType class = "MonoDevelop.FSharp.FSharpCompilerParameters" />
-    <DataType class = "MonoDevelop.FSharp.FSharpProjectParameters" />
+    <ComplexCondition>
+      <Or>
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" />
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
+      </Or>
+      <DataType class = "MonoDevelop.FSharp.FSharpCompilerParameters" />
+      <DataType class = "MonoDevelop.FSharp.FSharpProjectParameters" />
+    </ComplexCondition>
   </Extension>
 
   <Extension path = "/MonoDevelop/ProjectModel/Gui/ItemOptionPanels/Build/Compiler">
-    <Condition id="ActiveLanguage" value="F#">
-      <Panel id = "FSharpCodeGenerationPanel" _label = "Compiler" class = "MonoDevelop.FSharp.CodeGenerationPanel"/>
-    </Condition>
+    <ComplexCondition>
+      <Or>
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" />
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
+      </Or>
+      <Condition id="ActiveLanguage" value="F#">
+        <Panel id = "FSharpCodeGenerationPanel" _label = "Compiler" class = "MonoDevelop.FSharp.CodeGenerationPanel"/>
+      </Condition>
+    </ComplexCondition>
   </Extension>
 
   <Extension path="/MonoDevelop/Core/MimeTypes">
-    <MimeType id="text/x-fsharp" _description="F# Source File" icon="md-file-source" isText="true">
-      <File pattern="*.fs" />
-    </MimeType>
-    <MimeType id="text/x-fsharp" _description="F# Script File" icon="md-file-source" isText="true">
-      <File pattern="*.fsx" />
-      <File pattern="*.fsscript" />
-        </MimeType>
-    <MimeType id="text/x-fsharp" _description="F# Signature File" icon="md-file-header" isText="true">
-      <File pattern="*.fsi" />
-        </MimeType>
-    <MimeType id="application/fsproject+xml" _description="F# project file" baseType="application/xml">
-      <File pattern="*.fsproj" />
-    </MimeType>
+    <ComplexCondition>
+      <Or>
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" />
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
+      </Or>
+      <MimeType id="text/x-fsharp" _description="F# Source File" icon="md-file-source" isText="true">
+        <File pattern="*.fs" />
+      </MimeType>
+      <MimeType id="text/x-fsharp" _description="F# Script File" icon="md-file-source" isText="true">
+        <File pattern="*.fsx" />
+        <File pattern="*.fsscript" />
+          </MimeType>
+      <MimeType id="text/x-fsharp" _description="F# Signature File" icon="md-file-header" isText="true">
+        <File pattern="*.fsi" />
+          </MimeType>
+      <MimeType id="application/fsproject+xml" _description="F# project file" baseType="application/xml">
+        <File pattern="*.fsproj" />
+      </MimeType>
+    </ComplexCondition>
   </Extension>
 
   <Extension path="/MonoDevelop/ProjectModel/LanguageBindings">
-    <LanguageBinding id="F#" supportedextensions=".fs,.fsi,.fsx,.fsscript"
-                     class="MonoDevelop.FSharp.FSharpLanguageBinding" />
+    <ComplexCondition>
+      <Or>
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" />
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
+      </Or>
+      <LanguageBinding id="F#" supportedextensions=".fs,.fsi,.fsx,.fsscript" class="MonoDevelop.FSharp.FSharpLanguageBinding" />
+    </ComplexCondition>
   </Extension>
 
   <Extension path = "/MonoDevelop/Ide/ReferenceFinder">
-    <ReferenceFinder supportedmimetypes = "text/x-fsharp"
-                     class = "MonoDevelop.FSharp.FSharpReferenceFinder" />
+    <ComplexCondition>
+      <Or>
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" />
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
+      </Or>
+      <ReferenceFinder supportedmimetypes = "text/x-fsharp" class = "MonoDevelop.FSharp.FSharpReferenceFinder" />
+    </ComplexCondition>
   </Extension>
 
   <Extension path = "/MonoDevelop/Ide/TextEditorExtensions">
-    <Class fileExtensions=".fs,.fsi,.fsx,.fsscript" class="MonoDevelop.FSharp.FSharpTextEditorCompletion" />
-    <Class fileExtensions = ".fs,.fsx" class = "MonoDevelop.FSharp.FSharpPathExtension" />
-    <Class fileExtensions = ".fs,.fsx" class = "MonoDevelop.FSharp.HighlightUsagesExtension" />
+    <ComplexCondition>
+      <Or>
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" />
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
+      </Or>
+      <Class fileExtensions=".fs,.fsi,.fsx,.fsscript" class="MonoDevelop.FSharp.FSharpTextEditorCompletion" />
+      <Class fileExtensions = ".fs,.fsx" class = "MonoDevelop.FSharp.FSharpPathExtension" />
+      <Class fileExtensions = ".fs,.fsx" class = "MonoDevelop.FSharp.HighlightUsagesExtension" />
+    </ComplexCondition>
   </Extension>
 
   <Extension path = "/MonoDevelop/ProjectModel/ProjectServiceExtensions">
-    <Class class = "MonoDevelop.FSharp.FSharpProjectServiceExtension" />
+    <ComplexCondition>
+      <Or>
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" />
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
+      </Or>
+      <Class class = "MonoDevelop.FSharp.FSharpProjectServiceExtension" />
+    </ComplexCondition>
   </Extension>
 
   <!-- F# interactive -->
-
   <Extension path="/MonoDevelop/Ide/Pads">
-    <Pad id="MonoDevelop.FSharp.FSharpInteractivePad" defaultLayout="*" defaultPlacement="Bottom" _label="F# Interactive" icon="md-project" class="MonoDevelop.FSharp.FSharpInteractivePad" />
+    <ComplexCondition>
+      <Or>
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" />
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
+      </Or>
+      <Pad id="MonoDevelop.FSharp.FSharpInteractivePad" defaultLayout="*" defaultPlacement="Bottom" _label="F# Interactive" icon="md-project" class="MonoDevelop.FSharp.FSharpInteractivePad" />
+    </ComplexCondition>
   </Extension>
 
   <Extension path = "/MonoDevelop/Ide/Pads/ProjectPad">
-    <NodeBuilder class = "MonoDevelop.FSharp.FSharpProjectFileNodeExtension"/>
+    <ComplexCondition>
+      <Or>
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" />
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
+      </Or>
+      <NodeBuilder class = "MonoDevelop.FSharp.FSharpProjectFileNodeExtension"/>
+    </ComplexCondition>
   </Extension>
 
   <Extension path="/MonoDevelop/Ide/Commands">
-    <Category _name = "F# Integration" id="F# Integration">
-      <Command id="MonoDevelop.FSharp.FSharpCommands.ShowFSharpInteractive"
-          _label = "F# Interactive"
-          type="check"
-          _description="Show F# Interactive pad."
-          shortcut="Control|Alt|F"
-          macShortcut="Meta|Control|F"
-          defaultHandler="MonoDevelop.FSharp.ShowFSharpInteractive" />
+    <ComplexCondition>
+      <Or>
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" />
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
+      </Or>
+      <Category _name = "F# Integration" id="F# Integration">
+        <Command id="MonoDevelop.FSharp.FSharpCommands.ShowFSharpInteractive"
+            _label = "F# Interactive"
+            type="check"
+            _description="Show F# Interactive pad."
+            shortcut="Control|Alt|F"
+            macShortcut="Meta|Control|F"
+            defaultHandler="MonoDevelop.FSharp.ShowFSharpInteractive" />
 
-      <Command id="MonoDevelop.FSharp.FSharpCommands.SendSelection"
-          _label = "Send selection to F# Interactive"
-          _description="Send the selected text to F# Interactive"
-          shortcut="Ctrl|Return"
-          macShortcut="Ctrl|Return"
-          defaultHandler="MonoDevelop.FSharp.SendSelection" />
+        <Command id="MonoDevelop.FSharp.FSharpCommands.SendSelection"
+            _label = "Send selection to F# Interactive"
+            _description="Send the selected text to F# Interactive"
+            shortcut="Ctrl|Return"
+            macShortcut="Ctrl|Return"
+            defaultHandler="MonoDevelop.FSharp.SendSelection" />
 
-      <Command id="MonoDevelop.FSharp.FSharpCommands.SendLine"
-          _label = "Send line to F# Interactive"
-          _description="Send the current line to F# Interactive"
-          shortcut="Ctrl|Alt|L"
-          macShortcut="Meta|Control|L"
-          defaultHandler="MonoDevelop.FSharp.SendLine" />
+        <Command id="MonoDevelop.FSharp.FSharpCommands.SendLine"
+            _label = "Send line to F# Interactive"
+            _description="Send the current line to F# Interactive"
+            shortcut="Ctrl|Alt|L"
+            macShortcut="Meta|Control|L"
+            defaultHandler="MonoDevelop.FSharp.SendLine" />
 
-      <Command _description="Send the current project references to F# Interactive"
-          _label="Send references to F# Interactive"
-          defaultHandler="MonoDevelop.FSharp.SendReferences"
-          id="MonoDevelop.FSharp.FSharpCommands.SendReferences"
-          macShortcut="Meta|Control|P"
-          shortcut="Ctrl|Alt|P" />
-          
-      <Command _description="Restart F# Interactive"
-          _label="Restart F# Interactive"
-          defaultHandler="MonoDevelop.FSharp.RestartFsi"
-          id="MonoDevelop.FSharp.FSharpCommands.RestartFsi"
-          macShortcut="Meta|Control|R"
-          shortcut="Ctrl|Alt|R" />
-          
-      <Command _description="Clear F# Interactive"
-          _label="Clear F# Interactive"
-          defaultHandler="MonoDevelop.FSharp.ClearFsi"
-          id="MonoDevelop.FSharp.FSharpCommands.ClearFsi"
-          macShortcut="Meta|Control|C"
-          shortcut="Ctrl|Alt|C" />
-
-    </Category>
+        <Command _description="Send the current project references to F# Interactive"
+            _label="Send references to F# Interactive"
+            defaultHandler="MonoDevelop.FSharp.SendReferences"
+            id="MonoDevelop.FSharp.FSharpCommands.SendReferences"
+            macShortcut="Meta|Control|P"
+            shortcut="Ctrl|Alt|P" />
+            
+        <Command _description="Restart F# Interactive"
+            _label="Restart F# Interactive"
+            defaultHandler="MonoDevelop.FSharp.RestartFsi"
+            id="MonoDevelop.FSharp.FSharpCommands.RestartFsi"
+            macShortcut="Meta|Control|R"
+            shortcut="Ctrl|Alt|R" />
+            
+        <Command _description="Clear F# Interactive"
+            _label="Clear F# Interactive"
+            defaultHandler="MonoDevelop.FSharp.ClearFsi"
+            id="MonoDevelop.FSharp.FSharpCommands.ClearFsi"
+            macShortcut="Meta|Control|C"
+            shortcut="Ctrl|Alt|C" />
+      </Category>
+    </ComplexCondition>
   </Extension>
 
   <Extension path = "/MonoDevelop/SourceEditor2/ContextMenu/Editor">
-    <SeparatorItem id = "FSharpInteractiveStart" />
-    <CommandItem id = "MonoDevelop.FSharp.FSharpCommands.SendSelection" />
-    <CommandItem id = "MonoDevelop.FSharp.FSharpCommands.SendLine" />
-    <CommandItem id = "MonoDevelop.FSharp.FSharpCommands.SendReferences" />
+    <ComplexCondition>
+      <Or>
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" />
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
+      </Or>
+      <SeparatorItem id = "FSharpInteractiveStart" />
+      <CommandItem id = "MonoDevelop.FSharp.FSharpCommands.SendSelection" />
+      <CommandItem id = "MonoDevelop.FSharp.FSharpCommands.SendLine" />
+      <CommandItem id = "MonoDevelop.FSharp.FSharpCommands.SendReferences" />
+    </ComplexCondition>
   </Extension>
 
   <Extension path = "/MonoDevelop/Ide/MainMenu/Edit">
-    <CommandItem id = "MonoDevelop.FSharp.FSharpCommands.SendSelection" />
-    <CommandItem id = "MonoDevelop.FSharp.FSharpCommands.SendLine" />
-    <CommandItem id = "MonoDevelop.FSharp.FSharpCommands.SendReferences" />
+    <ComplexCondition>
+      <Or>
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" />
+        <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
+      </Or>
+      <CommandItem id = "MonoDevelop.FSharp.FSharpCommands.SendSelection" />
+      <CommandItem id = "MonoDevelop.FSharp.FSharpCommands.SendLine" />
+      <CommandItem id = "MonoDevelop.FSharp.FSharpCommands.SendReferences" />
+    </ComplexCondition>
   </Extension>
 
   <!--- F# Android -->
@@ -292,41 +398,47 @@
     </Dependencies>
 
     <Extension path="/MonoDevelop/Ide/FileTemplates">
-      <FileTemplate id= "FSharp.MonoDroidView" file ="Templates/Android/MonoDroidView.xft.xml"/>
-      <FileTemplate id= "FSharp.MonoDroidActivity" file ="Templates/Android/MonoDroidActivity.xft.xml"/>
-      <FileTemplate id= "FSharp.MonoDroidBroadcastReceiver" file ="Templates/Android/MonoDroidBroadcastReceiver.xft.xml"/>
-      <FileTemplate id= "FSharp.MonoDroidClass" file ="Templates/Android/MonoDroidClass.xft.xml"/>
-      <FileTemplate id= "FSharp.MonoDroidFragment" file ="Templates/Android/MonoDroidFragment.xft.xml"/>
-      <FileTemplate id= "FSharp.MonoDroidInterface" file ="Templates/Android/MonoDroidInterface.xft.xml"/>
+      <ComplexCondition>
+        <Or>
+          <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" />
+          <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
+        </Or>
+          <FileTemplate id= "FSharp.MonoDroidView" file ="Templates/Android/MonoDroidView.xft.xml"/>
+          <FileTemplate id= "FSharp.MonoDroidActivity" file ="Templates/Android/MonoDroidActivity.xft.xml"/>
+          <FileTemplate id= "FSharp.MonoDroidBroadcastReceiver" file ="Templates/Android/MonoDroidBroadcastReceiver.xft.xml"/>
+          <FileTemplate id= "FSharp.MonoDroidClass" file ="Templates/Android/MonoDroidClass.xft.xml"/>
+          <FileTemplate id= "FSharp.MonoDroidFragment" file ="Templates/Android/MonoDroidFragment.xft.xml"/>
+          <FileTemplate id= "FSharp.MonoDroidInterface" file ="Templates/Android/MonoDroidInterface.xft.xml"/>
+      </ComplexCondition>
     </Extension>
 
     <Extension path="/MonoDevelop/Ide/ProjectTemplates">
-      <ProjectTemplate id="FSharp.MonoDroidLibraryProject" file ="Templates/Android/MonoDroidLibraryProject.xpt.xml" />
-      <ProjectTemplate id="FSharp.MonoDroidApplicationProject" file ="Templates/Android/MonoDroidApplicationProject.xpt.xml"/>
-      <ProjectTemplate id="FSharp.MonoDroidApplicationLv12Project" file ="Templates/Android/MonoDroidApplicationProjectLv12.xpt.xml"/>
-      <ProjectTemplate id="FSharp.MonoDroidApplicationLv15Project" file ="Templates/Android/MonoDroidApplicationProjectLv15.xpt.xml"/>
-      <ProjectTemplate id="FSharp.MonoDroidOpenGLProject" file ="Templates/Android/MonoDroidOpenGLProject.xpt.xml"/>
-      <ProjectTemplate id="FSharp.MonoDroidUnitTestProject" file ="Templates/Android/MonoDroidUnitTestProject.xpt.xml"/>
+      <ComplexCondition>
+        <Or>
+          <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" />
+          <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
+        </Or>
+          <ProjectTemplate id="FSharp.MonoDroidLibraryProject" file ="Templates/Android/MonoDroidLibraryProject.xpt.xml" />
+          <ProjectTemplate id="FSharp.MonoDroidApplicationProject" file ="Templates/Android/MonoDroidApplicationProject.xpt.xml"/>
+          <ProjectTemplate id="FSharp.MonoDroidApplicationLv12Project" file ="Templates/Android/MonoDroidApplicationProjectLv12.xpt.xml"/>
+          <ProjectTemplate id="FSharp.MonoDroidApplicationLv15Project" file ="Templates/Android/MonoDroidApplicationProjectLv15.xpt.xml"/>
+          <ProjectTemplate id="FSharp.MonoDroidOpenGLProject" file ="Templates/Android/MonoDroidOpenGLProject.xpt.xml"/>
+          <ProjectTemplate id="FSharp.MonoDroidUnitTestProject" file ="Templates/Android/MonoDroidUnitTestProject.xpt.xml"/>
+      </ComplexCondition>
     </Extension>
 
-<!--     <Extension path = "/MonoDevelop/ProjectModel/MSBuildItemTypes">
-      <DotNetProjectSubtype 
-        guid="{F278D4AB-4730-4720-B08E-FE5E31564D9E}"
-        type="MonoDevelop.MonoDroid.MonoDroidProject"
-        useXBuild="true">
-        <AddImport language="F#" projects="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.FSharp.targets" />
-        <RemoveImport language="F#" projects="$(MSBuildExtensionsPath32)\FSharp\1.0\Microsoft.FSharp.Targets" />
+    <Extension path = "/MonoDevelop/ProjectModel/MSBuildItemTypes/MonoDevelop.MonoDroid.MonoDroidProject">
+      <ComplexCondition>
+        <Or>
+          <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" />
+          <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
+        </Or>
+          <AddImport language="F#" projects="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.FSharp.targets" />
+          <RemoveImport language="F#" projects="$(MSBuildExtensionsPath32)\FSharp\1.0\Microsoft.FSharp.Targets" />
           <RemoveImport language="F#" projects="$(MSBuildExtensionsPath32)\..\Microsoft F#\v4.0\Microsoft.FSharp.Targets" />
           <RemoveImport language="F#" projects="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
-        <RemoveImport language="F#" projects="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" />
-      </DotNetProjectSubtype>
-    </Extension> -->
-    <Extension path = "/MonoDevelop/ProjectModel/MSBuildItemTypes/MonoDevelop.MonoDroid.MonoDroidProject">
-      <AddImport language="F#" projects="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.FSharp.targets" />
-      <RemoveImport language="F#" projects="$(MSBuildExtensionsPath32)\FSharp\1.0\Microsoft.FSharp.Targets" />
-      <RemoveImport language="F#" projects="$(MSBuildExtensionsPath32)\..\Microsoft F#\v4.0\Microsoft.FSharp.Targets" />
-      <RemoveImport language="F#" projects="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
-      <RemoveImport language="F#" projects="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" />
+          <RemoveImport language="F#" projects="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" />
+      </ComplexCondition>
     </Extension>
 
   </Module>
@@ -340,13 +452,19 @@
     </Dependencies>
 
     <Extension path="/MonoDevelop/Ide/ProjectTemplates">
-      <ProjectTemplate id="FSharpIOSEmptyIPadProject" file="Templates/ios/Empty/ProjectIPad.xpt.xml"/>
-      <ProjectTemplate id="FSharpIOSEmptyIPhoneProject" file="Templates/ios/Empty/ProjectIPhone.xpt.xml"/>
-      <ProjectTemplate id="FSharpIOSEmptyUniversalProject" file="Templates/ios/Empty/ProjectUniversal.xpt.xml"/>
-      <ProjectTemplate id="FSharpIOSSingleViewIPadProject" file="Templates/ios/SingleView/ProjectIPad.xpt.xml"/>
-      <ProjectTemplate id="FSharpIOSSingleViewIPhoneProject" file="Templates/ios/SingleView/ProjectIPhone.xpt.xml"/>
-      <ProjectTemplate id="FSharpIOSSingleViewUniversalProject" file="Templates/ios/SingleView/ProjectUniversal.xpt.xml"/>
-      <ProjectTemplate id="FSharpIOSLibraryProject" file="Templates/ios/LibraryProject.xpt.xml"/>
+      <ComplexCondition>
+        <Or>
+          <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" />
+          <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
+        </Or>
+          <ProjectTemplate id="FSharpIOSEmptyIPadProject" file="Templates/ios/Empty/ProjectIPad.xpt.xml"/>
+          <ProjectTemplate id="FSharpIOSEmptyIPhoneProject" file="Templates/ios/Empty/ProjectIPhone.xpt.xml"/>
+          <ProjectTemplate id="FSharpIOSEmptyUniversalProject" file="Templates/ios/Empty/ProjectUniversal.xpt.xml"/>
+          <ProjectTemplate id="FSharpIOSSingleViewIPadProject" file="Templates/ios/SingleView/ProjectIPad.xpt.xml"/>
+          <ProjectTemplate id="FSharpIOSSingleViewIPhoneProject" file="Templates/ios/SingleView/ProjectIPhone.xpt.xml"/>
+          <ProjectTemplate id="FSharpIOSSingleViewUniversalProject" file="Templates/ios/SingleView/ProjectUniversal.xpt.xml"/>
+          <ProjectTemplate id="FSharpIOSLibraryProject" file="Templates/ios/LibraryProject.xpt.xml"/>
+      </ComplexCondition>
     </Extension>
   </Module>
 
@@ -360,21 +478,33 @@
     </Dependencies>
 
     <Extension path="/MonoDevelop/Ide/FileTemplates">
-      <FileTemplate id="FSharpMonoMacPlist" file="Templates/MonoMac/MonoMac/MonoMacPlist.xft.xml"/>
-      <FileTemplate id="FSharpMonoMacApplicationManifest" file="Templates/MonoMac/MonoMac/MonoMacApplicationManifest.xft.xml"/>
-      <FileTemplate id="FSharpMonoMacApplicationDocumentManifest" file ="Templates/MonoMac/MonoMac/MonoMacApplicationDocumentManifest.xft.xml"/>
-      <FileTemplate id="FSharpMonoMacWindowWithControllerXib" file ="Templates/MonoMac/MonoMac/MonoMacWindowWithControllerXib.xft.xml"/>
-      <FileTemplate id="FSharpXamMacPlist" file="Templates/MonoMac/XamMac/XamMacPlist.xft.xml"/>
-      <FileTemplate id="FSharpXamMacApplicationManifest" file="Templates/MonoMac/XamMac/XamMacApplicationManifest.xft.xml"/>
-      <FileTemplate id="FSharpXamMacApplicationDocumentManifest" file="Templates/MonoMac/XamMac/XamMacApplicationDocumentManifest.xft.xml"/>
-      <FileTemplate id="FSharpXamMacWindowWithControllerXib" file ="Templates/MonoMac/XamMac/XamMacWindowWithControllerXib.xft.xml"/>
+      <ComplexCondition>
+        <Or>
+          <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" />
+          <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
+        </Or>
+          <FileTemplate id="FSharpMonoMacPlist" file="Templates/MonoMac/MonoMac/MonoMacPlist.xft.xml"/>
+          <FileTemplate id="FSharpMonoMacApplicationManifest" file="Templates/MonoMac/MonoMac/MonoMacApplicationManifest.xft.xml"/>
+          <FileTemplate id="FSharpMonoMacApplicationDocumentManifest" file ="Templates/MonoMac/MonoMac/MonoMacApplicationDocumentManifest.xft.xml"/>
+          <FileTemplate id="FSharpMonoMacWindowWithControllerXib" file ="Templates/MonoMac/MonoMac/MonoMacWindowWithControllerXib.xft.xml"/>
+          <FileTemplate id="FSharpXamMacPlist" file="Templates/MonoMac/XamMac/XamMacPlist.xft.xml"/>
+          <FileTemplate id="FSharpXamMacApplicationManifest" file="Templates/MonoMac/XamMac/XamMacApplicationManifest.xft.xml"/>
+          <FileTemplate id="FSharpXamMacApplicationDocumentManifest" file="Templates/MonoMac/XamMac/XamMacApplicationDocumentManifest.xft.xml"/>
+          <FileTemplate id="FSharpXamMacWindowWithControllerXib" file ="Templates/MonoMac/XamMac/XamMacWindowWithControllerXib.xft.xml"/>
+      </ComplexCondition>
     </Extension>
 
     <Extension path="/MonoDevelop/Ide/ProjectTemplates">
-      <ProjectTemplate id="FSharpMonoMacProject" file="Templates/MonoMac/MonoMac/MonoMacProject.xpt.xml"/>
-      <ProjectTemplate id="FSharpMonoMacProjectEmpty" file="Templates/MonoMac/MonoMac/MonoMacProjectEmpty.xpt.xml"/>
-      <ProjectTemplate id="FSharpXamMacProject" file="Templates/MonoMac/XamMac/XamMacProject.xpt.xml"/>
-      <ProjectTemplate id="FSharpXamMacProjectEmpty" file="Templates/MonoMac/XamMac/XamMacProjectEmpty.xpt.xml"/>
+      <ComplexCondition>
+        <Or>
+          <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets" />
+          <Condition id="MSBuildTargetIsAvailable" target="$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.1\Framework\v4.0\Microsoft.FSharp.Targets" />
+        </Or>
+          <ProjectTemplate id="FSharpMonoMacProject" file="Templates/MonoMac/MonoMac/MonoMacProject.xpt.xml"/>
+          <ProjectTemplate id="FSharpMonoMacProjectEmpty" file="Templates/MonoMac/MonoMac/MonoMacProjectEmpty.xpt.xml"/>
+          <ProjectTemplate id="FSharpXamMacProject" file="Templates/MonoMac/XamMac/XamMacProject.xpt.xml"/>
+          <ProjectTemplate id="FSharpXamMacProjectEmpty" file="Templates/MonoMac/XamMac/XamMacProjectEmpty.xpt.xml"/>
+      </ComplexCondition>
     </Extension>
   </Module>
 
