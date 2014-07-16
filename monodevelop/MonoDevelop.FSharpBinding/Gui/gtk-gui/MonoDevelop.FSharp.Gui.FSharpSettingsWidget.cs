@@ -5,39 +5,71 @@ namespace MonoDevelop.FSharp.Gui
 	public partial class FSharpSettingsWidget
 	{
 		private global::Gtk.VBox vbox1;
-		private global::Gtk.HBox hbox2;
-		private global::Gtk.Label label4;
-		private global::Gtk.CheckButton checkInteractiveUseDefault;
-		private global::Gtk.Table table1;
-		private global::Gtk.Button buttonBrowse;
-		private global::Gtk.Entry entryArguments;
-		private global::Gtk.Entry entryPath;
-		private global::Gtk.Label GtkLabel1;
-		private global::Gtk.Label GtkLabel6;
-		private global::Gtk.HBox hbox1;
-		private global::Gtk.Label label2;
-		private global::Gtk.CheckButton checkCompilerUseDefault;
-		private global::Gtk.Frame frame1;
-		private global::Gtk.Alignment GtkAlignment2;
-		private global::Gtk.Table table2;
-		private global::Gtk.Button buttonCompilerBrowse;
-		private global::Gtk.Entry entryCompilerPath;
-		private global::Gtk.Label label3;
-		private global::Gtk.Label GtkLabel5;
-		private global::Gtk.Frame frame4;
-		private global::Gtk.Alignment GtkAlignment1;
-		private global::Gtk.FontButton fontbutton1;
-		private global::Gtk.Label GtkLabel13;
-		private global::Gtk.Label label1;
-		private global::Gtk.CheckButton matchThemeCheckbox;
-		private global::Gtk.HBox colorsHBox;
-		private global::Gtk.VBox vbox2;
-		private global::Gtk.Label label5;
-		private global::Gtk.ColorButton baseColorButton;
-		private global::Gtk.VBox vbox3;
-		private global::Gtk.Label label6;
-		private global::Gtk.ColorButton textColorButton;
 		
+		private global::Gtk.HBox hbox2;
+		
+		private global::Gtk.Label label4;
+		
+		private global::Gtk.CheckButton checkInteractiveUseDefault;
+		
+		private global::Gtk.Table table1;
+		
+		private global::Gtk.Button buttonBrowse;
+		
+		private global::Gtk.Entry entryArguments;
+		
+		private global::Gtk.Entry entryPath;
+		
+		private global::Gtk.Label GtkLabel1;
+		
+		private global::Gtk.Label GtkLabel6;
+		
+		private global::Gtk.HBox hbox1;
+		
+		private global::Gtk.Label label2;
+		
+		private global::Gtk.CheckButton checkCompilerUseDefault;
+		
+		private global::Gtk.Frame frame1;
+		
+		private global::Gtk.Alignment GtkAlignment2;
+		
+		private global::Gtk.Table table2;
+		
+		private global::Gtk.Button buttonCompilerBrowse;
+		
+		private global::Gtk.Entry entryCompilerPath;
+		
+		private global::Gtk.Label label3;
+		
+		private global::Gtk.Label GtkLabel5;
+		
+		private global::Gtk.Frame frame4;
+		
+		private global::Gtk.Alignment GtkAlignment1;
+		
+		private global::Gtk.FontButton fontbutton1;
+		
+		private global::Gtk.Label GtkLabel13;
+		
+		private global::Gtk.Label label1;
+		
+		private global::Gtk.CheckButton matchThemeCheckbox;
+		
+		private global::Gtk.HBox colorsHBox;
+		
+		private global::Gtk.VBox vbox2;
+		
+		private global::Gtk.Label label5;
+		
+		private global::Gtk.ColorButton baseColorButton;
+		
+		private global::Gtk.VBox vbox3;
+		
+		private global::Gtk.Label label6;
+		
+		private global::Gtk.ColorButton textColorButton;
+
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);

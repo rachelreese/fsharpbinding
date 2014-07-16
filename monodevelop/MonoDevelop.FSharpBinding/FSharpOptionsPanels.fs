@@ -191,3 +191,23 @@ type CodeGenerationPanel() =
     fsconfig.DefineConstants <- widget.EntryDefines.Text
 
 
+// --------------------------------------------------------------------------------------
+// F# build options - compiler configuration panel
+// --------------------------------------------------------------------------------------
+
+/// Configuration panel with settings for the F# compiler 
+/// (such as generation of debug symbols, XML, tail-calls etc.)
+type FSharpGeneralOptionsPanel() = 
+  inherit ItemOptionsPanel()
+  let mutable widget : FSharpCompilerOptionsWidget = null
+
+  override x.CreatePanelWidget() =
+    widget <- new FSharpCompilerOptionsWidget()
+    widget.Show()
+    upcast widget 
+
+  override x.ValidateChanges() = true
+
+  override x.ApplyChanges() = ()
+
+
