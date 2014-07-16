@@ -1,5 +1,4 @@
 ﻿using System;
-
 namespace MonoDevelop.FSharp.Gui
 {
 	[System.ComponentModel.ToolboxItem (true)]

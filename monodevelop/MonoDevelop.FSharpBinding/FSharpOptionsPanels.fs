@@ -69,7 +69,7 @@ type FSharpSettingsPanel() =
     // Implement "Browse..." button for F# Compiler path
     widget.ButtonCompilerBrowse.Clicked.Add(fun _ ->
       let args = [| box "Cancel"; box ResponseType.Cancel; box "Open"; box ResponseType.Accept |]
-      use dlg = new FileChooserDialog("Broser for F# Compiler", null, FileChooserAction.Open, args)
+      use dlg = new FileChooserDialog("Browser for F# Compiler", null, FileChooserAction.Open, args)
       if dlg.Run() = int ResponseType.Accept then
         widget.EntryCompilerPath.Text <- dlg.Filename
       dlg.Hide() )
@@ -190,24 +190,38 @@ type CodeGenerationPanel() =
     fsconfig.OtherFlags <- if (String.IsNullOrWhiteSpace widget.EntryCommandLine.Text) then null else widget.EntryCommandLine.Text
     fsconfig.DefineConstants <- widget.EntryDefines.Text
 
-
 // --------------------------------------------------------------------------------------
-// F# build options - compiler configuration panel
+// F# build options - general options panel
 // --------------------------------------------------------------------------------------
 
-/// Configuration panel with settings for the F# compiler 
-/// (such as generation of debug symbols, XML, tail-calls etc.)
+/// Options panel with settings for target framework
 type FSharpGeneralOptionsPanel() = 
-  inherit ItemOptionsPanel()
-  let mutable widget : FSharpCompilerOptionsWidget = null
+  inherit OptionsPanel()
+  let mutable widget : CompilerOptionsPanelWidget = null
 
   override x.CreatePanelWidget() =
-    widget <- new FSharpCompilerOptionsWidget()
+    widget <- new CompilerOptionsPanelWidget()
+    let cb = widget.TargetFrameworkComboBox
+    cb.Clear()
+    let cell = new CellRendererText()
+    cb.PackStart(cell, false)
+    cb.AddAttribute(cell, "text", 0)
+    let store = new ListStore(typeof<string>)
+    store.AppendValues("hello") |> ignore
+    cb.Model <- store
+
     widget.Show()
+    //  <PropertyGroup>
+    //    <FSharpTargetsPath>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\FSharp\Microsoft.FSharp.Targets</FSharpTargetsPath>
+    //  </PropertyGroup>
+    //  <Import Project="$(FSharpTargetsPath)" Condition="Exists('$(FSharpTargetsPath)')" />
     upcast widget 
 
   override x.ValidateChanges() = true
 
-  override x.ApplyChanges() = ()
-
+  override x.ApplyChanges() =
+    //    <PropertyGroup>
+    //    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    //  </PropertyGroup>
+    ()
 
