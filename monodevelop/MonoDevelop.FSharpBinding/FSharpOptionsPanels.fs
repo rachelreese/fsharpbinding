@@ -195,7 +195,7 @@ type CodeGenerationPanel() =
 // --------------------------------------------------------------------------------------
 
 /// Options panel with settings for target framework
-type FSharpGeneralOptionsPanel() = 
+type GeneralOptionsPanel() = 
   inherit OptionsPanel()
   let mutable widget : CompilerOptionsPanelWidget = null
 
