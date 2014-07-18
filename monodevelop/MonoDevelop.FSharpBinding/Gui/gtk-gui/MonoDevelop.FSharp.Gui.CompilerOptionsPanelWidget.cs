@@ -4,11 +4,11 @@ namespace MonoDevelop.FSharp.Gui
 {
 	public partial class CompilerOptionsPanelWidget
 	{
-		private global::Gtk.Expander expander1;
+		private global::Gtk.HBox hbox1;
+		
+		private global::Gtk.Label targetFrameworksLabel;
 		
 		private global::Gtk.ComboBox targetFrameworkComboBox;
-		
-		private global::Gtk.Label GtkLabel;
 
 		protected virtual void Build ()
 		{
@@ -17,20 +17,29 @@ namespace MonoDevelop.FSharp.Gui
 			global::Stetic.BinContainer.Attach (this);
 			this.Name = "MonoDevelop.FSharp.Gui.CompilerOptionsPanelWidget";
 			// Container child MonoDevelop.FSharp.Gui.CompilerOptionsPanelWidget.Gtk.Container+ContainerChild
-			this.expander1 = new global::Gtk.Expander (null);
-			this.expander1.CanFocus = true;
-			this.expander1.Name = "expander1";
-			this.expander1.Expanded = true;
-			// Container child expander1.Gtk.Container+ContainerChild
+			this.hbox1 = new global::Gtk.HBox ();
+			this.hbox1.Name = "hbox1";
+			this.hbox1.Spacing = 6;
+			// Container child hbox1.Gtk.Box+BoxChild
+			this.targetFrameworksLabel = new global::Gtk.Label ();
+			this.targetFrameworksLabel.Name = "targetFrameworksLabel";
+			this.targetFrameworksLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("Target Framework:");
+			this.hbox1.Add (this.targetFrameworksLabel);
+			global::Gtk.Box.BoxChild w1 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.targetFrameworksLabel]));
+			w1.Position = 0;
+			w1.Expand = false;
+			w1.Fill = false;
+			w1.Padding = ((uint)(10));
+			// Container child hbox1.Gtk.Box+BoxChild
 			this.targetFrameworkComboBox = global::Gtk.ComboBox.NewText ();
 			this.targetFrameworkComboBox.Name = "targetFrameworkComboBox";
-			this.expander1.Add (this.targetFrameworkComboBox);
-			this.GtkLabel = new global::Gtk.Label ();
-			this.GtkLabel.Name = "GtkLabel";
-			this.GtkLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("GtkExpander");
-			this.GtkLabel.UseUnderline = true;
-			this.expander1.LabelWidget = this.GtkLabel;
-			this.Add (this.expander1);
+			this.hbox1.Add (this.targetFrameworkComboBox);
+			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.targetFrameworkComboBox]));
+			w2.Position = 1;
+			w2.Expand = false;
+			w2.Fill = false;
+			w2.Padding = ((uint)(10));
+			this.Add (this.hbox1);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}

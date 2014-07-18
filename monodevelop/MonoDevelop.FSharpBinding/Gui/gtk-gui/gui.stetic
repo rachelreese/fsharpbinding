@@ -655,29 +655,38 @@
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="MonoDevelop.FSharp.Gui.CompilerOptionsPanelWidget" design-size="300 49">
+  <widget class="Gtk.Bin" id="MonoDevelop.FSharp.Gui.CompilerOptionsPanelWidget" design-size="300 31">
     <property name="MemberName" />
     <property name="Visible">False</property>
     <child>
-      <widget class="Gtk.Expander" id="expander1">
+      <widget class="Gtk.HBox" id="hbox1">
         <property name="MemberName" />
-        <property name="CanFocus">True</property>
-        <property name="Expanded">True</property>
+        <property name="Spacing">6</property>
+        <child>
+          <widget class="Gtk.Label" id="targetFrameworksLabel">
+            <property name="MemberName" />
+            <property name="LabelProp" translatable="yes">Target Framework:</property>
+          </widget>
+          <packing>
+            <property name="Position">0</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+            <property name="Padding">10</property>
+          </packing>
+        </child>
         <child>
           <widget class="Gtk.ComboBox" id="targetFrameworkComboBox">
             <property name="MemberName" />
             <property name="IsTextCombo">True</property>
             <property name="Items" translatable="yes" />
           </widget>
-        </child>
-        <child>
-          <widget class="Gtk.Label" id="GtkLabel">
-            <property name="MemberName" />
-            <property name="LabelProp" translatable="yes">GtkExpander</property>
-            <property name="UseUnderline">True</property>
-          </widget>
           <packing>
-            <property name="type">label_item</property>
+            <property name="Position">1</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+            <property name="Padding">10</property>
           </packing>
         </child>
       </widget>

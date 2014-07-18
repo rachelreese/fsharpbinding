@@ -14,7 +14,6 @@ open FSharp.CompilerBinding
 open System.Linq
 open MonoDevelop.Projects.Formats.MSBuild
 
-
 type CorrectGuidMSBuildExtension() =
     inherit MSBuildExtension()
 

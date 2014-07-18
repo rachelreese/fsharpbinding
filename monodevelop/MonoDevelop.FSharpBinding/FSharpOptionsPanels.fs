@@ -12,6 +12,7 @@ open MonoDevelop.Core
 open MonoDevelop.Projects
 open MonoDevelop.Ide.Gui.Dialogs
 open MonoDevelop.FSharp.Gui
+open Microsoft.FSharp.Compiler
 
 // --------------------------------------------------------------------------------------
 // F# build options - compiler configuration panel
@@ -207,21 +208,27 @@ type GeneralOptionsPanel() =
     cb.PackStart(cell, false)
     cb.AddAttribute(cell, "text", 0)
     let store = new ListStore(typeof<string>)
-    store.AppendValues("hello") |> ignore
+    Runtime.SystemAssemblyService.GetTargetFrameworks () 
+        |> Seq.toArray
+        |> Array.map (fun t -> store.AppendValues t.Name)
+        |> ignore
+
     cb.Model <- store
 
     widget.Show()
-    //  <PropertyGroup>
-    //    <FSharpTargetsPath>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\FSharp\Microsoft.FSharp.Targets</FSharpTargetsPath>
-    //  </PropertyGroup>
-    //  <Import Project="$(FSharpTargetsPath)" Condition="Exists('$(FSharpTargetsPath)')" />
-    upcast widget 
+    upcast widget
 
-  override x.ValidateChanges() = true
+  override x.ValidateChanges() = 
+    true
 
   override x.ApplyChanges() =
-    //    <PropertyGroup>
+
+    let provider = lazy new CodeDom.FSharpCodeProvider()
+
+    PropertyService.Set("TargetFrameworkVersion", widget.TargetFrameworkComboBox.ActiveText)
+    PropertyService.SaveProperties()
+
+    //  <PropertyGroup>
     //    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     //  </PropertyGroup>
-    ()
 

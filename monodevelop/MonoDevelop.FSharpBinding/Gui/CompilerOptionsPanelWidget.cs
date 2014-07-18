@@ -12,4 +12,3 @@ namespace MonoDevelop.FSharp.Gui
 		public Gtk.ComboBox TargetFrameworkComboBox { get { return this.targetFrameworkComboBox; } }
 	}
 }
-
