@@ -1,4 +1,9 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
 namespace MonoDevelop.FSharp.Gui
 {
 	[System.ComponentModel.ToolboxItem (true)]

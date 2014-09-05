@@ -12,7 +12,7 @@ open MonoDevelop.Core
 open MonoDevelop.Projects
 open MonoDevelop.Ide.Gui.Dialogs
 open MonoDevelop.FSharp.Gui
-open Microsoft.FSharp.Compiler
+//open Microsoft.FSharp.Compiler
 
 // --------------------------------------------------------------------------------------
 // F# build options - compiler configuration panel
@@ -197,7 +197,7 @@ type CodeGenerationPanel() =
 
 /// Options panel with settings for target framework
 type GeneralOptionsPanel() = 
-  inherit OptionsPanel()
+  inherit ItemOptionsPanel()
   let mutable widget : CompilerOptionsPanelWidget = null
 
   override x.CreatePanelWidget() =
@@ -208,7 +208,9 @@ type GeneralOptionsPanel() =
     cb.PackStart(cell, false)
     cb.AddAttribute(cell, "text", 0)
     let store = new ListStore(typeof<string>)
+    let project = x.ConfiguredProject :?> DotNetProject
     Runtime.SystemAssemblyService.GetTargetFrameworks () 
+        |> Seq.filter (fun t -> project.TargetRuntime.IsInstalled t && project.SupportsFramework t)
         |> Seq.toArray
         |> Array.map (fun t -> store.AppendValues t.Name)
         |> ignore
@@ -221,12 +223,13 @@ type GeneralOptionsPanel() =
   override x.ValidateChanges() = 
     true
 
-  override x.ApplyChanges() =
+  override x.ApplyChanges() = ()
 
-    let provider = lazy new CodeDom.FSharpCodeProvider()
+//    let provider = lazy new CodeDom.FSharpCodeProvider()
+//    provider.
 
-    PropertyService.Set("TargetFrameworkVersion", widget.TargetFrameworkComboBox.ActiveText)
-    PropertyService.SaveProperties()
+//    PropertyService.Set("TargetFrameworkVersion", widget.TargetFrameworkComboBox.ActiveText)
+//    PropertyService.SaveProperties()
 
     //  <PropertyGroup>
     //    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
