@@ -7,7 +7,7 @@
 ;;         2012-2014 Robin Neatherway <robin.neatherway@gmail.com>
 ;; Maintainer: Robin Neatherway
 ;; Keywords: languages
-;; Version: 1.2.1
+;; Version: 1.3.0
 
 ;; This file is not part of GNU Emacs.
 
@@ -188,9 +188,7 @@ and whether it is in a project directory.")
   (require 'fsharp-doc)
   (require 'fsharp-mode-completion)
 
-  ;(kill-all-local-variables)
   (use-local-map fsharp-mode-map)
-  ;(set-syntax-table fsharp-mode-syntax-table)
 
   (mapc 'make-local-variable
         '(paragraph-start

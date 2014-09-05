@@ -10,10 +10,16 @@ open ICSharpCode.NRefactory.Semantics
 open ICSharpCode.NRefactory.TypeSystem
 open ICSharpCode.NRefactory.TypeSystem.Implementation
 open Microsoft.FSharp.Compiler.SourceCodeServices
+open FSharp.CompilerBinding
 
 /// MD/XS extension for highlighting the usages of a symbol within the current buffer.
 type HighlightUsagesExtension() as this =
     inherit MonoDevelop.SourceEditor.AbstractUsagesExtension<ResolveResult>()
+
+    override x.Initialize() =
+        base.Initialize ()
+        let syntaxMode = new FSharpSyntaxMode (this.Document)
+        this.TextEditorData.Document.SyntaxMode <- syntaxMode
             
     override x.TryResolve(resolveResult) =
         true
@@ -28,8 +34,14 @@ type HighlightUsagesExtension() as this =
             let projectFilename, files, args, framework = MonoDevelop.getCheckerArgs(this.Document.Project, currentFile)
 
             let symbolReferences =
-                Async.RunSynchronously(async{return! MDLanguageService.Instance.GetUsesOfSymbolAtLocationInFile(projectFilename, currentFile, source, files, line, col, lineStr, args, framework)},
-                                       cancellationToken = token)
+                try Async.RunSynchronously(async{return! MDLanguageService.Instance.GetUsesOfSymbolAtLocationInFile(projectFilename, currentFile, source, files, line, col, lineStr, args, framework)},
+                                           timeout = ServiceSettings.blockingTimeout,
+                                           cancellationToken = token)
+                with
+                | :? TimeoutException -> LoggingService.LogWarning ("Highlight usages timed out")
+                                         None
+                | exn -> LoggingService.LogError ("Highlight usages error", exn)
+                         None
 
             match symbolReferences with
             | Some(fsSymbolName, references) -> 

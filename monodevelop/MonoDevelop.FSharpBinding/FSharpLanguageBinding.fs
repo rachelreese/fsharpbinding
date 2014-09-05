@@ -21,8 +21,7 @@ type CorrectGuidMSBuildExtension() =
         try
             let fsimportExists =
                 project.Imports
-                |> Seq.exists (fun import -> import.Project.EndsWith ("FSharp.Targets",
-                                                                      StringComparison.OrdinalIgnoreCase))
+                |> Seq.exists (fun import -> import.Project.EndsWith ("FSharp.Targets", StringComparison.OrdinalIgnoreCase))
 
             if fsimportExists then
                 project.GetGlobalPropertyGroup().Properties
@@ -79,6 +78,7 @@ type FSharpLanguageBinding() =
       IdeApp.Workspace.FileRenamedInProject.Add(invalidateAll)
       IdeApp.Workspace.ReferenceAddedToProject.Add(fun r -> invalidateProjectFile(r.Project))
       IdeApp.Workspace.ReferenceRemovedFromProject.Add(fun r -> invalidateProjectFile(r.Project))
+      IdeApp.Workspace.SolutionUnloaded.Add(fun _ -> MDLanguageService.Instance.ClearLanguageServiceRootCachesAndCollectAndFinalizeAllTransients())
 
     
   // ----------------------------------------------------------------------------
@@ -114,7 +114,7 @@ type FSharpLanguageBinding() =
               pars.GenerateTailCalls <- false
           let releaseAtt = options.GetAttribute ("Release")
           if (System.String.Compare ("True", releaseAtt, StringComparison.OrdinalIgnoreCase) = 0) then
-              pars.DebugSymbols <- true
+              pars.DebugSymbols <- false
               pars.Optimize <- true
               pars.GenerateTailCalls <- true
       // TODO: set up the documentation file to be AssemblyName.xml by default (but how do we get AssemblyName here?)
