@@ -23,8 +23,6 @@ namespace MonoDevelop.FSharp.Gui
 		
 		private global::Gtk.Label GtkLabel1;
 		
-		private global::Gtk.Label GtkLabel6;
-		
 		private global::Gtk.Label GtkLabel4;
 		
 		private global::Gtk.Label GtkLabel6;
@@ -35,26 +33,12 @@ namespace MonoDevelop.FSharp.Gui
 		
 		private global::Gtk.VBox vbox4;
 		
-		private global::Gtk.Label label1;
-		
-		private global::Gtk.CheckButton matchThemeCheckbox;
-		
 		private global::Gtk.HBox hbox7;
-		
-		private global::Gtk.Label label5;
-		
-		private global::Gtk.ColorButton baseColorButton;
-		
-		private global::Gtk.Label label6;
-		
+				
 		private global::Gtk.ColorButton textColorButton;
 		
 		private global::Gtk.HBox hbox9;
-		
-		private global::Gtk.Label GtkLabel13;
-		
-		private global::Gtk.FontButton fontbutton1;
-		
+				
 		private global::Gtk.HSeparator hseparator3;
 		
 		private global::Gtk.HBox hbox1;
@@ -72,8 +56,6 @@ namespace MonoDevelop.FSharp.Gui
 		private global::Gtk.Button buttonCompilerBrowse;
 		
 		private global::Gtk.Entry entryCompilerPath;
-		
-		private global::Gtk.Label label3;
 		
 		private global::Gtk.Label GtkLabel5;
 		
@@ -100,8 +82,6 @@ namespace MonoDevelop.FSharp.Gui
 		private global::Gtk.VBox vbox3;
 		
 		private global::Gtk.Label label6;
-		
-		private global::Gtk.ColorButton textColorButton;
 		
 		private global::Gtk.Label label3;
 

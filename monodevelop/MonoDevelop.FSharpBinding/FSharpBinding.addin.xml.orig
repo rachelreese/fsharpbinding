@@ -220,7 +220,7 @@
 
   <Extension path = "/MonoDevelop/ProjectModel/Gui/ItemOptionPanels/Build/General">
     <Condition id="ActiveLanguage" value="F#">
-      <Panel id = "FSharpGeneralOptionsPanel" _label = "F#" class = "MonoDevelop.FSharp.GeneralOptionsPanel" insertafter=""/>
+      <Panel id = "FSharpGeneralOptionsPanel" _label = "F#" class = "MonoDevelop.FSharp.GeneralOptionsPanel"/>
     </Condition>
   </Extension>
 

@@ -55,6 +55,7 @@
     <Compile Include="gtk-gui\MonoDevelop.FSharp.Gui.FSharpSettingsWidget.cs" />
     <Compile Include="CompilerOptionsPanelWidget.cs" />
     <Compile Include="gtk-gui\MonoDevelop.FSharp.Gui.CompilerOptionsPanelWidget.cs" />
+    <Compile Include="gtk-gui\MonoDevelop.FSharp.Gui.Widget.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
